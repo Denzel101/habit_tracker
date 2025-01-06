@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
-import 'package:habit_tracker/router/router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,25 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: size.height * 0.07,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ActionButton(
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    AppRouter.chooseHabitRoute,
-                  ),
-                  icon: Icons.dashboard_outlined,
-                ),
-                Text(
-                  'Monday, 6',
-                  style: AppStyles.kTextLabelStyle1,
-                ),
-                ActionButton(
-                  onTap: () {},
-                  icon: Icons.calendar_month_outlined,
-                ),
-              ],
+            const TopInfoWidget(
+              title: 'Monday, 6',
             ),
             SizedBox(
               height: size.height * 0.04,
