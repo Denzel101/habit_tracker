@@ -16,23 +16,79 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: size.height * 0.07,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ActionButton(
+                const ActionButton(
                   icon: Icons.border_all_outlined,
                 ),
                 Text(
                   'Monday, 6',
-                  style: TextStyle(
-                    color: AppColors.textGrey,
-                    fontSize: 16,
-                  ),
+                  style: AppStyles.kTextLabelStyle1,
                 ),
-                ActionButton(
+                const ActionButton(
                   icon: Icons.calendar_month_outlined,
                 ),
               ],
+            ),
+            SizedBox(
+              height: size.height * 0.04,
+            ),
+            Container(
+              padding: const EdgeInsets.all(AppStyles.kAppPadding),
+              width: size.width,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.info_outline,
+                      color: Colors.white54,
+                      size: 17,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 35,
+                        backgroundColor: Colors.grey.shade900,
+                        child: const Icon(
+                          Icons.notifications,
+                          size: 30,
+                          color: Colors.orange,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.04,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: size.height * 0.005,
+                        children: [
+                          const Text(
+                            'Notification!',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            'Now is the time to read the book,\nyou can '
+                            'change it in settings.',
+                            style: AppStyles.kTextLabelStyle2,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
