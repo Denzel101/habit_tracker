@@ -1,6 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_tracker/app/app.dart';
 import 'package:habit_tracker/bootstrap.dart';
 
-void main() {
-  bootstrap(() => const App());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GoogleFonts.pendingFonts([
+    GoogleFonts.poppins(),
+  ]);
+  await bootstrap(() => const App());
 }
