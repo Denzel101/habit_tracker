@@ -6,7 +6,7 @@ class AppStyles {
   static TextStyle kTextLabelStyle1 = const TextStyle(
     color: AppColors.textGrey,
     fontSize: 15,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
   );
 
   static TextStyle kTextLabelStyle2 = const TextStyle(

@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -12,6 +18,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: AppStyles.kAppPadding),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: size.height * 0.07,
@@ -88,6 +95,64 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ],
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.04,
+            ),
+            SizedBox(
+              height: 90,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: weekdays.length,
+                itemBuilder: (context, index) {
+                  final item = weekdays[index];
+                  return GestureDetector(
+                    onTap: () {
+                      _selectedIndex = index;
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: 90,
+                      width: 65,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppStyles.kAppPadding,
+                      ),
+                      margin:
+                          const EdgeInsets.only(right: AppStyles.kAppPadding),
+                      decoration: BoxDecoration(
+                        color: _selectedIndex == index
+                            ? Colors.deepOrange
+                            : Colors.transparent,
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            item.dayName,
+                            style: AppStyles.kTextLabelStyle1.copyWith(
+                              fontSize: 13,
+                              color: _selectedIndex == index
+                                  ? Colors.white54
+                                  : AppColors.textGrey,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            item.dayNumber,
+                            style: AppStyles.kTextLabelStyle1.copyWith(
+                              color: _selectedIndex == index
+                                  ? Colors.white
+                                  : AppColors.textGrey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
