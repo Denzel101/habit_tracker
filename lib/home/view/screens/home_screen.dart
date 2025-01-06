@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
 
@@ -11,6 +12,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late int _selectedIndex = 0;
+  final List<DailyHabitModel> completedHabits = [];
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -27,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const ActionButton(
-                  icon: Icons.border_all_outlined,
+                  icon: Icons.dashboard_outlined,
                 ),
                 Text(
                   'Monday, 6',
@@ -55,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Icon(
                       Icons.info_outline,
                       color: Colors.white54,
-                      size: 17,
+                      size: 13,
                     ),
                   ),
                   Row(
@@ -63,10 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       CircleAvatar(
                         radius: 35,
                         backgroundColor: Colors.grey.shade900,
-                        child: const Icon(
-                          Icons.notifications,
-                          size: 30,
-                          color: Colors.orange,
+                        child: Image.asset(
+                          AssetPath.readingHabit,
+                          height: 40,
                         ),
                       ),
                       SizedBox(
@@ -77,13 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: size.height * 0.005,
                         children: [
-                          const Text(
+                          Text(
                             'Notification!',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            style: AppStyles.kTextLabelStyle3,
                           ),
                           Text(
                             'Now is the time to read the book,\nyou can '
@@ -123,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const EdgeInsets.only(right: AppStyles.kAppPadding),
                       decoration: BoxDecoration(
                         color: _selectedIndex == index
-                            ? Colors.deepOrange
+                            ? AppColors.activeColor
                             : Colors.transparent,
                         border: Border.all(color: Colors.grey.shade300),
                         borderRadius: BorderRadius.circular(15),
@@ -154,6 +152,108 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+            ),
+            SizedBox(
+              height: size.height * 0.04,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Monday habit',
+                  style: AppStyles.kTextLabelStyle1.copyWith(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  'See all',
+                  style: AppStyles.kTextLabelStyle1.copyWith(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            AlignedGridView.count(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              shrinkWrap: true,
+              itemCount: dailyHabits.length,
+              itemBuilder: (context, index) {
+                final item = dailyHabits[index];
+                final isSelected = completedHabits.contains(item);
+                return Container(
+                  height: 170,
+                  width: 150,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: item.color,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            item.image,
+                            height: 40,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              switch (isSelected) {
+                                case true:
+                                  completedHabits.remove(item);
+                                case false:
+                                  completedHabits.add(item);
+                              }
+
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                color: isSelected
+                                    ? Colors.deepOrange
+                                    : AppColors.greyColor,
+                                size: 17,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Text(
+                        item.habit,
+                        style: AppStyles.kTextLabelStyle3.copyWith(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        item.goal,
+                        style: AppStyles.kTextLabelStyle1.copyWith(
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         ),

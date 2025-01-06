@@ -13,4 +13,10 @@ class AppStyles {
     color: Colors.white54,
     fontSize: 11,
   );
+
+  static TextStyle kTextLabelStyle3 = const TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
 }
