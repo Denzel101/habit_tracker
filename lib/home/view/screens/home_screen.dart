@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late int _selectedIndex = 0;
-  final List<DailyHabitModel> completedHabits = [];
+  final List<DailyHabitModel> _completedHabits = [];
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: dailyHabits.length,
               itemBuilder: (context, index) {
                 final item = dailyHabits[index];
-                final isSelected = completedHabits.contains(item);
+                final isSelected = _completedHabits.contains(item);
                 return Container(
                   height: 170,
                   width: 150,
@@ -218,9 +218,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               switch (isSelected) {
                                 case true:
-                                  completedHabits.remove(item);
+                                  _completedHabits.remove(item);
                                 case false:
-                                  completedHabits.add(item);
+                                  _completedHabits.add(item);
                               }
 
                               setState(() {});
