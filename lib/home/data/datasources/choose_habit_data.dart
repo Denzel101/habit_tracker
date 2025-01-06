@@ -49,5 +49,5 @@ final List<ChooseHabitModel> chooseHabits = [
   _travelling,
   _readBook,
   _gaming,
-  _mechanic
+  _mechanic,
 ];

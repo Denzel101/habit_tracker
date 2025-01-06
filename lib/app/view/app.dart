@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       theme: AppTheme.lightTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: AppRouter.homeRoute,
+      initialRoute: AppRouter.landingRoute,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
