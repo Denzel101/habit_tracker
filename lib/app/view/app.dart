@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/l10n/l10n.dart';
+import 'package:habit_tracker/router/router.dart';
 import 'package:habit_tracker/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -12,8 +12,9 @@ class App extends StatelessWidget {
       theme: AppTheme.lightTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const HomeScreen(),
+      initialRoute: AppRouter.homeRoute,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
