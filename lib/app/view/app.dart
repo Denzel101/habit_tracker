@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/l10n/l10n.dart';
 import 'package:habit_tracker/router/router.dart';
@@ -8,6 +9,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = FirebaseAuth.instance.currentUser != null;
     return GestureDetector(
       onTap: () {
         final currentFocus = FocusScope.of(context);
@@ -19,7 +21,8 @@ class App extends StatelessWidget {
         theme: AppTheme.lightTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        initialRoute: AppRouter.loginRoute,
+        initialRoute:
+            isLoggedIn ? AppRouter.landingRoute : AppRouter.loginRoute,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.onGenerateRoute,
       ),
