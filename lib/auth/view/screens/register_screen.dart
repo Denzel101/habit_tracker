@@ -214,6 +214,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               context,
                               AppRouter.loginRoute,
                             );
+                            _usernameController.clear();
+                            _emailAddressController.clear();
+                            _passwordController.clear();
+                            _confirmPasswordController.clear();
                           } else {
                             NotificationHelper.showToast(
                               context: context,
