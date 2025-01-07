@@ -145,9 +145,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         loaded: (result) {
                           if (result.user != null) {
-                            Navigator.pushNamed(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
                               AppRouter.landingRoute,
+                              (route) => false,
                             );
                           } else {
                             NotificationHelper.showToast(

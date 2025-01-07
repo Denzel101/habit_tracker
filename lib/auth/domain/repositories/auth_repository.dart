@@ -38,10 +38,12 @@ class AuthRepository {
         password: password,
       );
 
-      final user = response.user!;
-      await user.updateDisplayName(username);
+      final user = response.user;
+      if (user != null) {
+        await user.updateDisplayName(username);
+      }
 
-      return user;
+      return user!;
     } catch (_) {
       rethrow;
     }

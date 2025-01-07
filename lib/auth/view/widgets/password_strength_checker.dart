@@ -53,7 +53,7 @@ class _PasswordStrengthCheckerState extends State<PasswordStrengthChecker> {
     RegExp('[A-Z]'): 'Has at least one uppercase letter',
     RegExp(r'[!@#$%^&*(),.?":{}|<>]'): 'Contains a special character',
     RegExp(r'\d'): 'Contains a number',
-    RegExp(r'^.{8,32}$'): 'Has 8 characters minimum',
+    RegExp(r'^.{6,32}$'): 'Has 6 characters minimum',
   };
 
   @override

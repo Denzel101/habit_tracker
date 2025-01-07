@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/router/router.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 
@@ -18,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _meshController = AnimatedMeshGradientController();
   late bool _toggleVisibility = true;
   late bool _isConfirmPasswordVisible = false;
@@ -35,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailAddressController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -86,6 +90,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: size.height * 0.04,
                   ),
                   CustomTextField(
+                    label: 'Username*',
+                    hintText: 'Enter username',
+                    keyBoard: TextInputType.name,
+                    textCapitalization: TextCapitalization.none,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'Add Username';
+                      }
+                      return null;
+                    },
+                    textEditingController: _usernameController,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.016,
+                  ),
+                  CustomTextField(
                     label: 'Email Address*',
                     hintText: 'Enter email address',
                     keyBoard: TextInputType.emailAddress,
@@ -127,6 +148,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: (value) {
                       if (value!.trim().isEmpty) {
                         return 'Add Password';
+                      } else if (!_isStrong) {
+                        return 'Invalid Password';
                       }
                       return null;
                     },
@@ -178,19 +201,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: size.height * 0.04,
                   ),
-                  SizedBox(
-                    width: size.width,
-                    child: BlockButtonWidget(
-                      onPressed: !_isStrong
-                          ? null
-                          : () {
-                              if (_formKey.currentState!.validate()) {}
+                  BlocConsumer<RegisterUserCubit, RegisterUserState>(
+                    listener: (context, state) {
+                      state.mapOrNull(
+                        error: (result) => NotificationHelper.showToast(
+                          context: context,
+                          title: result.error,
+                        ),
+                        loaded: (result) {
+                          if (result.user.email != null) {
+                            Navigator.pushNamed(
+                              context,
+                              AppRouter.loginRoute,
+                            );
+                          } else {
+                            NotificationHelper.showToast(
+                              context: context,
+                              title: 'User Not Created',
+                            );
+                          }
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: size.width,
+                        child: BlockButtonWidget(
+                          onPressed: state.maybeWhen(
+                            loading: () => null,
+                            orElse: () => () async {
+                              if (_formKey.currentState!.validate()) {
+                                await context
+                                    .read<RegisterUserCubit>()
+                                    .registerUser(
+                                      email: _emailAddressController.text,
+                                      password: _passwordController.text,
+                                      username: _usernameController.text,
+                                    );
+                              }
                             },
-                      child: Text(
-                        'Register',
-                        style: AppStyles.kTextLabelStyle3,
-                      ),
-                    ),
+                          ),
+                          child: state.maybeWhen(
+                            loading: LoadingIndicator.new,
+                            orElse: () => Text(
+                              'Register',
+                              style: AppStyles.kTextLabelStyle3,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: size.height * 0.024,
