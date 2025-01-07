@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873133403502:android:20ccf6bd81a223bdd3a57f",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.habit_tracker.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873133403502:android:36bf1d38dbdc0689d3a57f",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.habit_tracker.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"
