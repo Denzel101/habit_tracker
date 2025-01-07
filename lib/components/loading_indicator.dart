@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({super.key});
+  const LoadingIndicator(
+      {super.key, this.color = Colors.white, this.size = 15});
+  final Color? color;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: SizedBox(
-        height: 15,
-        width: 15,
+        height: size,
+        width: size,
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: color,
         ),
       ),
     );

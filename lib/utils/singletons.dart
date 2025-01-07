@@ -9,5 +9,10 @@ class Singletons {
             authRepository: locator<AuthRepository>(),
           ),
         ),
+        BlocProvider<LogoutUserCubit>(
+          create: (context) => LogoutUserCubit(
+            authRepository: locator<AuthRepository>(),
+          ),
+        ),
       ];
 }

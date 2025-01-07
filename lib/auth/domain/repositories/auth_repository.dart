@@ -18,4 +18,12 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  Future<void> logoutUser() async {
+    try {
+      await _auth.signOut();
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
