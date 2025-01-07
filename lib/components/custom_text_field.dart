@@ -54,7 +54,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56,
+      height: 60,
       child: TextFormField(
         style: const TextStyle(
           height: 1,
@@ -100,17 +100,29 @@ class CustomTextField extends StatelessWidget {
           ),
           hintStyle: AppStyles.kTextLabelStyle2.copyWith(
             fontWeight: FontWeight.w400,
-            color: AppColors.greyColor,
+            color: AppColors.textGrey,
           ),
           errorStyle:
               AppStyles.kTextLabelStyle2.copyWith(color: Colors.redAccent),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade300,
+          // enabledBorder: OutlineInputBorder(
+          //   borderSide: BorderSide(
+          //     color: Colors.grey.shade500,
+          //   ),
+          //   borderRadius: BorderRadius.circular(10),
+          // ),
+          // focusedBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(
+          //     color: AppColors.activeColor,
+          //   ),
+          //   borderRadius: BorderRadius.circular(10),
+          // ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.redAccent,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          focusedBorder: OutlineInputBorder(
+          border: OutlineInputBorder(
             borderSide: const BorderSide(
               color: AppColors.activeColor,
             ),
