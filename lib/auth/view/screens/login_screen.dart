@@ -2,8 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/router/router.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 
@@ -133,32 +136,67 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: size.height * 0.04,
                   ),
-                  SizedBox(
-                    width: size.width,
-                    child: BlockButtonWidget(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, AppRouter.landingRoute);
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Login',
-                            style: AppStyles.kTextLabelStyle3,
+                  BlocConsumer<LoginUserCubit, LoginUserState>(
+                    listener: (context, state) {
+                      state.mapOrNull(
+                        error: (result) => NotificationHelper.showToast(
+                          context: context,
+                          title: result.error,
+                        ),
+                        loaded: (result) {
+                          if (result.user != null) {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRouter.landingRoute,
+                              (route) => false,
+                            );
+                          } else {
+                            NotificationHelper.showToast(
+                              context: context,
+                              title: 'User Not Found',
+                            );
+                          }
+                        },
+                      );
+                    },
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: size.width,
+                        child: BlockButtonWidget(
+                          onPressed: state.maybeWhen(
+                            loading: () => null,
+                            orElse: () => () async {
+                              if (_formKey.currentState!.validate()) {
+                                await context.read<LoginUserCubit>().loginUser(
+                                      email: _emailAddressController.text,
+                                      password: _passwordController.text,
+                                    );
+                              }
+                            },
                           ),
-                          SizedBox(
-                            width: size.width * 0.02,
+                          child: state.maybeWhen(
+                            loading: LoadingIndicator.new,
+                            orElse: () => Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Login',
+                                  style: AppStyles.kTextLabelStyle3,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.02,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_rounded,
+                                  color: Colors.white,
+                                  size: 17,
+                                ),
+                              ],
+                            ),
                           ),
-                          const Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Colors.white,
-                            size: 17,
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: size.height * 0.024,

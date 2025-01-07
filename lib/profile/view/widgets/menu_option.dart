@@ -19,19 +19,19 @@ class MenuOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 4, bottom: 4),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: 60,
-          decoration: const BoxDecoration(
-            color: AppColors.greyColor,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
           child: Center(
             child: ListTile(
+              tileColor: AppColors.greyColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
               leading: leading,
               title: Text(
                 title,

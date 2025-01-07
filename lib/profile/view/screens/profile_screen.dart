@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:habit_tracker/auth/auth.dart';
+import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/profile/profile.dart';
+import 'package:habit_tracker/router/router.dart';
+import 'package:habit_tracker/versioning/build_version.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -109,18 +115,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.black.withValues(alpha: 0.9),
               ),
             ),
-            MenuOption(
-              onTap: () {},
-              leading: const SizedBox(
-                height: 24,
-                width: 24,
-                child: Icon(Icons.login_outlined),
-              ),
-              title: 'Log Out',
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-                color: Colors.black.withValues(alpha: 0.9),
+            BlocConsumer<LogoutUserCubit, LogoutUserState>(
+              listener: (context, state) {
+                state.mapOrNull(
+                  error: (result) {
+                    NotificationHelper.showToast(
+                      context: context,
+                      title: result.error,
+                    );
+                  },
+                  loaded: (result) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRouter.loginRoute,
+                      (route) => false,
+                    );
+                  },
+                );
+              },
+              builder: (context, state) {
+                return MenuOption(
+                  onTap: () async =>
+                      context.read<LogoutUserCubit>().logoutUser(),
+                  leading: const SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: Icon(Icons.login_outlined),
+                  ),
+                  title: 'Log Out',
+                  trailing: state.maybeWhen(
+                    loading: () => const LoadingIndicator(
+                      color: Colors.black,
+                      size: 10,
+                    ),
+                    orElse: () => Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Colors.black.withValues(alpha: 0.9),
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Text(
+              'Version $packageVersion',
+              style: AppStyles.kTextLabelStyle3.copyWith(
+                color: Colors.black,
               ),
             ),
           ].animate(
