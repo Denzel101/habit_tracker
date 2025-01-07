@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
+import 'package:habit_tracker/profile/profile.dart';
 import 'package:habit_tracker/stats/stats.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -17,15 +18,14 @@ class _LandingScreenState extends State<LandingScreen> {
   final List<Widget> _screens = const [
     HomeScreen(),
     StatsScreen(),
-    Center(
-      child: Text('Profile'),
-    ),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 30,
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,

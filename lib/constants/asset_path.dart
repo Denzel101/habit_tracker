@@ -11,4 +11,5 @@ class AssetPath {
   static const String travellingHabit = 'assets/images/treasure-map.png';
   static const String gamingHabit = 'assets/images/game.png';
   static const String mechanicHabit = 'assets/images/construction.png';
+  static const String profileImage = 'assets/images/profile.png';
 }

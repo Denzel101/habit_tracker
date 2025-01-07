@@ -89,7 +89,7 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: isSelected
-                          ? const Color(0xFFFDF8F5)
+                          ? AppColors.secondaryActiveColor
                           : Colors.transparent,
                       border: Border.all(
                         color: isSelected
