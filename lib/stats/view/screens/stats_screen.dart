@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/stats/stats.dart';
@@ -29,7 +30,12 @@ class _StatsScreenState extends State<StatsScreen> {
               height: size.height * 0.04,
             ),
             const HabitChartWidget(),
-          ],
+          ].animate(
+            effects: [
+              const FadeEffect(),
+              const SlideEffect(),
+            ],
+          ),
         ),
       ),
     );

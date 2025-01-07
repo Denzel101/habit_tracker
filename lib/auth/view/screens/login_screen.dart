@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/router/router.dart';
@@ -183,7 +184,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                ],
+                ].animate(
+                  effects: [
+                    const FadeEffect(),
+                    const SlideEffect(),
+                  ],
+                ),
               ),
             ),
           ),

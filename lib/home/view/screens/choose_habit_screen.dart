@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
@@ -120,7 +121,12 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
             SizedBox(
               height: size.height * 0.06,
             ),
-          ],
+          ].animate(
+            effects: [
+              const FadeEffect(),
+              const SlideEffect(),
+            ],
+          ),
         ),
       ),
     );

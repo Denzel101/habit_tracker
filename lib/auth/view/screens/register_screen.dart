@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
@@ -218,7 +219,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                ],
+                ].animate(
+                  effects: [
+                    const FadeEffect(),
+                    const SlideEffect(),
+                  ],
+                ),
               ),
             ),
           ),
