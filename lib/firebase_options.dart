@@ -72,5 +72,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'habit-tracker-2ee7e.firebasestorage.app',
     iosBundleId: 'com.example.verygoodcore.habit-tracker',
   );
-
 }
