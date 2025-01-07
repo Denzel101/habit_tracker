@@ -212,7 +212,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 Navigator.pushNamed(
-                                    context, AppRouter.loginRoute);
+                                  context,
+                                  AppRouter.loginRoute,
+                                );
                               },
                           ),
                         ],
