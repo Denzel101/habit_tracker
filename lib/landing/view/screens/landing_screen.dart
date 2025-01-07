@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
+import 'package:habit_tracker/stats/stats.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -15,9 +16,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    Center(
-      child: Text('Stats'),
-    ),
+    StatsScreen(),
     Center(
       child: Text('Profile'),
     ),
