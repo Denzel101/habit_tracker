@@ -8,13 +8,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: AppRouter.landingRoute,
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRouter.onGenerateRoute,
+    return GestureDetector(
+      onTap: () {
+        final currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.focusedChild?.unfocus();
+        }
+      },
+      child: MaterialApp(
+        theme: AppTheme.lightTheme,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        initialRoute: AppRouter.loginRoute,
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRouter.onGenerateRoute,
+      ),
     );
   }
 }

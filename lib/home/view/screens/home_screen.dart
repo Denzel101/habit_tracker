@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
@@ -246,7 +247,13 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: size.height * 0.02,
             ),
-          ],
+          ].animate(
+            interval: const Duration(milliseconds: 50),
+            effects: [
+              const FadeEffect(),
+              const SlideEffect(),
+            ],
+          ),
         ),
       ),
     );
