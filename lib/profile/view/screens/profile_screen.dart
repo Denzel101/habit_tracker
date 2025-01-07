@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/profile/profile.dart';
+import 'package:habit_tracker/versioning/build_version.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -121,6 +122,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Icons.arrow_forward_ios,
                 size: 16,
                 color: Colors.black.withValues(alpha: 0.9),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Text(
+              'Version $packageVersion',
+              style: AppStyles.kTextLabelStyle3.copyWith(
+                color: Colors.black,
               ),
             ),
           ].animate(
