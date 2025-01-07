@@ -104,18 +104,18 @@ class CustomTextField extends StatelessWidget {
           ),
           errorStyle:
               AppStyles.kTextLabelStyle2.copyWith(color: Colors.redAccent),
-          // enabledBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(
-          //     color: Colors.grey.shade500,
-          //   ),
-          //   borderRadius: BorderRadius.circular(10),
-          // ),
-          // focusedBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(
-          //     color: AppColors.activeColor,
-          //   ),
-          //   borderRadius: BorderRadius.circular(10),
-          // ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: AppColors.activeColor,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.transparent,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: Colors.redAccent,

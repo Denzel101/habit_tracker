@@ -62,7 +62,7 @@ class _PasswordStrengthCheckerState extends State<PasswordStrengthChecker> {
       width: double.infinity,
       padding: const EdgeInsets.all(AppStyles.kAppPadding),
       decoration: BoxDecoration(
-        color: AppColors.secondaryActiveColor,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.activeColor),
       ),
