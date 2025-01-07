@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/router/router.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -158,9 +159,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   width: size.width,
                   child: BlockButtonWidget(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
+                    onPressed: !_isStrong
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {}
+                          },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -198,7 +201,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () async {},
+                            ..onTap = () {
+                              Navigator.pushNamed(
+                                  context, AppRouter.loginRoute);
+                            },
                         ),
                       ],
                     ),
