@@ -16,7 +16,7 @@ abstract class NotificationHelper {
       backgroundColor: Colors.white,
       alignment: Alignment.bottomRight,
       closeButtonShowType: CloseButtonShowType.always,
-      title: Text(
+      description: Text(
         title,
         style: AppStyles.kTextLabelStyle3.copyWith(
           color: Colors.black,
