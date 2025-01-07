@@ -214,6 +214,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               context,
                               AppRouter.loginRoute,
                             );
+                            NotificationHelper.showToast(
+                              context: context,
+                              title: 'Account Created Successfully',
+                              isError: false,
+                            );
                             _usernameController.clear();
                             _emailAddressController.clear();
                             _passwordController.clear();
