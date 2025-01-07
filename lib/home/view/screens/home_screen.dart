@@ -248,6 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: size.height * 0.02,
             ),
           ].animate(
+            interval: const Duration(milliseconds: 50),
             effects: [
               const FadeEffect(),
               const SlideEffect(),

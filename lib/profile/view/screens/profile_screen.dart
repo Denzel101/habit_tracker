@@ -124,6 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ].animate(
+            interval: const Duration(milliseconds: 50),
             effects: [
               const FadeEffect(),
               const SlideEffect(),

@@ -122,6 +122,7 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
               height: size.height * 0.06,
             ),
           ].animate(
+            interval: const Duration(milliseconds: 50),
             effects: [
               const FadeEffect(),
               const SlideEffect(),

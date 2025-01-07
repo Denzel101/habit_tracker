@@ -220,6 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ].animate(
+                  interval: const Duration(milliseconds: 50),
                   effects: [
                     const FadeEffect(),
                     const SlideEffect(),

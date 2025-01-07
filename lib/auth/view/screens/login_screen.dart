@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,7 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailAddressController = TextEditingController();
+  final _emailAddressController = TextEditingController(
+    text: kDebugMode ? 'denzel@gmail.com' : '',
+  );
   final _passwordController = TextEditingController();
   final _meshController = AnimatedMeshGradientController();
   late bool _toggleVisibility = true;
@@ -134,7 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: size.width,
                     child: BlockButtonWidget(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushNamed(context, AppRouter.landingRoute);
+                        }
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -185,6 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ].animate(
+                  interval: const Duration(milliseconds: 50),
                   effects: [
                     const FadeEffect(),
                     const SlideEffect(),

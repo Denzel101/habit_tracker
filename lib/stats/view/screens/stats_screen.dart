@@ -31,6 +31,7 @@ class _StatsScreenState extends State<StatsScreen> {
             ),
             const HabitChartWidget(),
           ].animate(
+            interval: const Duration(milliseconds: 50),
             effects: [
               const FadeEffect(),
               const SlideEffect(),
