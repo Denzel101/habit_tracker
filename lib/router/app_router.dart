@@ -8,6 +8,7 @@ class AppRouter {
   static const String chooseHabitRoute = 'choose-habit-route';
   static const String landingRoute = 'landing-route';
   static const String loginRoute = 'login-route';
+  static const String registerRoute = 'register-route';
 
   static Route<String>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -29,6 +30,11 @@ class AppRouter {
       case loginRoute:
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
+        );
+
+      case registerRoute:
+        return MaterialPageRoute(
+          builder: (context) => const RegisterScreen(),
         );
     }
 

@@ -1,26 +1,30 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
-import 'package:habit_tracker/router/router.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _emailAddressController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   late bool _toggleVisibility = true;
+  late bool _isConfirmPasswordVisible = false;
+  bool _isStrong = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _emailAddressController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -50,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: size.height * 0.008,
                 ),
                 Text(
-                  "Let's log you in",
+                  "Let's register you",
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -87,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: 'Password*',
                   hintText: 'Enter password',
                   obscure: _toggleVisibility,
-                  keyBoard: TextInputType.text,
+                  keyBoard: TextInputType.visiblePassword,
                   textCapitalization: TextCapitalization.none,
                   textInputAction: TextInputAction.done,
                   suffixIcon: IconButton(
@@ -107,6 +111,48 @@ class _LoginScreenState extends State<LoginScreen> {
                   textEditingController: _passwordController,
                 ),
                 SizedBox(
+                  height: size.height * 0.016,
+                ),
+                CustomTextField(
+                  label: 'Confirm Password*',
+                  hintText: 'Enter password',
+                  textEditingController: _confirmPasswordController,
+                  keyBoard: TextInputType.visiblePassword,
+                  obscure: _isConfirmPasswordVisible,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                      });
+                    },
+                    icon: _isConfirmPasswordVisible
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
+                  ),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Confirm password is empty';
+                    } else if (value.trim() != _passwordController.text) {
+                      return 'Password does not match';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                AnimatedBuilder(
+                  animation: _passwordController,
+                  builder: (context, child) {
+                    final password = _passwordController.text;
+
+                    return PasswordStrengthChecker(
+                      onStrengthChanged: ({required bool isStrong}) =>
+                          setState(() => _isStrong = isStrong),
+                      password: password,
+                    );
+                  },
+                ),
+                SizedBox(
                   height: size.height * 0.04,
                 ),
                 SizedBox(
@@ -119,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Login',
+                          'Register',
                           style: AppStyles.kTextLabelStyle3,
                         ),
                         SizedBox(
@@ -141,23 +187,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   child: Text.rich(
                     TextSpan(
-                      text: "Don't have an account? ",
+                      text: 'Already have an account? ',
                       style: AppStyles.kTextLabelStyle2
                           .copyWith(color: AppColors.textGrey),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Create',
+                          text: 'Sign In',
                           style: AppStyles.kTextLabelStyle3.copyWith(
                             color: Colors.black,
                             decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushNamed(
-                                context,
-                                AppRouter.registerRoute,
-                              );
-                            },
+                            ..onTap = () async {},
                         ),
                       ],
                     ),
