@@ -14,5 +14,10 @@ class Singletons {
             authRepository: locator<AuthRepository>(),
           ),
         ),
+        BlocProvider<RegisterUserCubit>(
+          create: (context) => RegisterUserCubit(
+            authRepository: locator<AuthRepository>(),
+          ),
+        ),
       ];
 }

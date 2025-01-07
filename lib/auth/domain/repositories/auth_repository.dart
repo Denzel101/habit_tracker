@@ -26,4 +26,24 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  Future<User> registerUser({
+    required String username,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final user = response.user!;
+      await user.updateDisplayName(username);
+
+      return user;
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
