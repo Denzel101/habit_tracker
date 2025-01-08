@@ -134,6 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       AppRouter.loginRoute,
                       (route) => false,
                     );
+                    locator<HiveService>().clearBox();
                   },
                 );
               },
