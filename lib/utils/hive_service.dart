@@ -1,17 +1,21 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:habit_tracker/auth/auth.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/utils/utils.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 
 abstract class HiveService {
   Future<void> initBoxes();
-  void persistToken(String token);
-  String? retrieveToken();
+  void persistUserInfo({required LoginResponseDto loginDetails});
+  LoginResponseDto? retrieveUserInfo();
   void clearBox();
 }
 
 class HiveServiceImplementation implements HiveService {
+  static const String userInfo = 'user-info';
+
   @override
   Future<void> initBoxes() async {
     await Hive.initFlutter();
@@ -32,7 +36,7 @@ class HiveServiceImplementation implements HiveService {
     );
     final encryptionKeyUint8List = base64Url.decode(key!);
 
-    // Hive.registerAdapter(UserLocationAdapter());
+    Hive.registerAdapter(LoginResponseAdapter());
 
     await Hive.openBox<dynamic>(
       HabitTrackerConfig.instance!.values.hiveBoxKey,
@@ -44,22 +48,22 @@ class HiveServiceImplementation implements HiveService {
   void clearBox() {
     Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
         .deleteAll([
-      'user-location',
+      userInfo,
     ]);
   }
 
   @override
-  void persistToken(String token) {
+  void persistUserInfo({required LoginResponseDto loginDetails}) {
     Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
-        .put('accessToken', token);
+        .put(userInfo, loginDetails);
   }
 
   @override
-  String? retrieveToken() {
+  LoginResponseDto? retrieveUserInfo() {
     final box =
         Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey);
-    final accessToken = box.get('accessToken') as String?;
-    if (accessToken == null) return null;
-    return accessToken;
+    final userDetails = box.get(userInfo) as LoginResponseDto?;
+    if (userDetails == null) return null;
+    return userDetails;
   }
 }

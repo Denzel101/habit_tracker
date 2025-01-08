@@ -7,6 +7,7 @@ class Singletons {
         BlocProvider<LoginUserCubit>(
           create: (context) => LoginUserCubit(
             authRepository: locator<AuthRepository>(),
+            hiveService: locator<HiveService>(),
           ),
         ),
         BlocProvider<LogoutUserCubit>(

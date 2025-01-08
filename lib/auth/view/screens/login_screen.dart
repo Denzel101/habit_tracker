@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _emailAddressController = TextEditingController(
-    text: kDebugMode ? 'denzel@gmail.com' : '',
+    text: kDebugMode ? 'denzelgatugu@outlook.com' : '',
   );
   final _passwordController = TextEditingController();
   final _meshController = AnimatedMeshGradientController();
