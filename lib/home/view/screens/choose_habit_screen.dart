@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
+import 'package:habit_tracker/router/router.dart';
 
 class ChooseHabitScreen extends StatefulWidget {
   const ChooseHabitScreen({super.key});
@@ -13,7 +14,8 @@ class ChooseHabitScreen extends StatefulWidget {
 }
 
 class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
-  final List<ChooseHabitModel> _chosenHabits = [];
+  int? _selectedIndex;
+  ChooseHabitModel? _chosenHabit;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,15 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
         child: SizedBox(
           width: size.width,
           child: BlockButtonWidget(
-            onPressed: _chosenHabits.isEmpty ? null : () {},
+            onPressed: _chosenHabit == null
+                ? null
+                : () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRouter.createHabitRoute,
+                      arguments: _chosenHabit,
+                    );
+                  },
             child: Text(
               'Get Started!',
               style: AppStyles.kTextLabelStyle3,
@@ -52,7 +62,7 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
               height: size.height * 0.02,
             ),
             Text(
-              'Choose your daily habits, you can choose\nmore than one',
+              'Choose your daily habit, you can choose\nonly one',
               style: AppStyles.kTextLabelStyle2.copyWith(
                 color: AppColors.textGrey,
                 fontSize: 13,
@@ -71,15 +81,11 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
               crossAxisSpacing: 20,
               itemBuilder: (context, index) {
                 final item = chooseHabits[index];
-                final isSelected = _chosenHabits.contains(item);
+                final isSelected = _selectedIndex == index;
                 return GestureDetector(
                   onTap: () {
-                    switch (isSelected) {
-                      case true:
-                        _chosenHabits.remove(item);
-                      case false:
-                        _chosenHabits.add(item);
-                    }
+                    _selectedIndex = index;
+                    _chosenHabit = item;
 
                     setState(() {});
                   },
