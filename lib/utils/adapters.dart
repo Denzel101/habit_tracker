@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:habit_tracker/auth/auth.dart';
+import 'package:habit_tracker/home/home.dart';
 import 'package:hive_ce/hive.dart';
 
 class LoginResponseAdapter extends TypeAdapter<LoginResponseDto> {
@@ -18,6 +19,25 @@ class LoginResponseAdapter extends TypeAdapter<LoginResponseDto> {
 
   @override
   void write(BinaryWriter writer, LoginResponseDto obj) {
+    writer.write(json.encode(obj.toJson()));
+  }
+}
+
+class CreateHabitAdapter extends TypeAdapter<CreateHabitModel> {
+  @override
+  final typeId = 2;
+
+  @override
+  CreateHabitModel read(BinaryReader reader) {
+    return CreateHabitModel.fromJson(
+      Map<String, dynamic>.of(
+        json.decode(reader.read() as String) as Map<String, dynamic>,
+      ),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CreateHabitModel obj) {
     writer.write(json.encode(obj.toJson()));
   }
 }

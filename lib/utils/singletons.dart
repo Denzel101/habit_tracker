@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/auth/auth.dart';
+import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/utils/utils.dart';
 
 class Singletons {
@@ -18,6 +19,11 @@ class Singletons {
         BlocProvider<RegisterUserCubit>(
           create: (context) => RegisterUserCubit(
             authRepository: locator<AuthRepository>(),
+          ),
+        ),
+        BlocProvider<UpdateHabitDetailsCubit>(
+          create: (context) => UpdateHabitDetailsCubit(
+            hiveService: locator<HiveService>(),
           ),
         ),
       ];

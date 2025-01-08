@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/home/home.dart';
+import 'package:habit_tracker/router/router.dart';
 
 class CreateHabitScreen extends StatefulWidget {
   const CreateHabitScreen({required this.chosenHabit, super.key});
@@ -17,7 +19,9 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
   final _descriptionController = TextEditingController();
   final _dateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final List<CreateHabitModel> _createdHabits = [];
   String? _selectedFrequency;
+  DateTime? _selectedDateTime;
 
   @override
   void dispose() {
@@ -38,7 +42,28 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
           width: size.width,
           child: BlockButtonWidget(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {}
+              if (_formKey.currentState!.validate()) {
+                _createdHabits.add(
+                  CreateHabitModel(
+                    habitName: _nameController.text,
+                    description: _descriptionController.text,
+                    frequency: _selectedFrequency!,
+                    startDate: _selectedDateTime!,
+                    habitIcon: widget.chosenHabit.image,
+                    habitLabel: widget.chosenHabit.habit,
+                  ),
+                );
+
+                context
+                    .read<UpdateHabitDetailsCubit>()
+                    .updateHabitDetails(createdHabits: _createdHabits);
+
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRouter.landingRoute,
+                  (route) => false,
+                );
+              }
             },
             child: Text(
               'Continue',
@@ -145,6 +170,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
               CustomTextField(
                 onTap: () async {
                   final result = await FunctionHelper.selectStartDate(context);
+                  _selectedDateTime = result;
                   _dateController.text =
                       '${result.day}-${result.month}-${result.year}';
                   setState(() {});
