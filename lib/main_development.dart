@@ -26,6 +26,8 @@ Future<void> main() async {
 
   setUpLocator();
 
+  await locator<HiveService>().initBoxes();
+
   await GoogleFonts.pendingFonts([
     GoogleFonts.poppins(),
   ]);
