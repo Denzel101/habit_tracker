@@ -8,7 +8,19 @@ extension StringExtension on String {
 }
 
 extension DateTimeFormatting on DateTime {
-  String toCurrentDay() {
+  String toCurrMonthDay() {
     return DateFormat('EEEE, d').format(this);
+  }
+
+  String toShortDay() {
+    return DateFormat('EEE').format(this);
+  }
+
+  String toNumDay() {
+    return DateFormat('dd').format(this);
+  }
+
+  String toFullDay() {
+    return DateFormat('EEEE').format(this);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/home/home.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,8 +14,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late int _selectedIndex = 0;
   final List<CreateHabitModel> _completedHabits = [];
+  final _today = DateTime.now();
+  var _selectedDay = DateTime.now();
+  final _currentWeek = FunctionHelper.getCurrentWeek();
 
   @override
   void initState() {
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: size.height * 0.07,
             ),
             TopInfoWidget(
-              title: DateTime.now().toCurrentDay(),
+              title: _today.toCurrMonthDay(),
             ),
             SizedBox(
               height: size.height * 0.04,
@@ -99,12 +102,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemCount: weekdays.length,
+                itemCount: _currentWeek.length,
                 itemBuilder: (context, index) {
-                  final item = weekdays[index];
+                  final item = _currentWeek[index];
+                  final isSelected =
+                      _selectedDay.toCurrMonthDay() == item.toCurrMonthDay();
                   return GestureDetector(
                     onTap: () {
-                      _selectedIndex = index;
+                      _selectedDay = item;
                       setState(() {});
                     },
                     child: Container(
@@ -116,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin:
                           const EdgeInsets.only(right: AppStyles.kAppPadding),
                       decoration: BoxDecoration(
-                        color: _selectedIndex == index
+                        color: isSelected
                             ? AppColors.activeColor
                             : Colors.transparent,
                         border: Border.all(color: Colors.grey.shade300),
@@ -125,19 +130,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Text(
-                            item.dayName,
+                            item.toShortDay(),
                             style: AppStyles.kTextLabelStyle1.copyWith(
                               fontSize: 13,
-                              color: _selectedIndex == index
+                              color: isSelected
                                   ? Colors.white54
                                   : AppColors.textGrey,
                             ),
                           ),
                           const Spacer(),
                           Text(
-                            item.dayNumber,
+                            item.toNumDay(),
                             style: AppStyles.kTextLabelStyle1.copyWith(
-                              color: _selectedIndex == index
+                              color: isSelected
                                   ? Colors.white
                                   : AppColors.textGrey,
                             ),
@@ -157,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Monday habit',
+                  '${_selectedDay.toFullDay()} habit',
                   style: AppStyles.kTextLabelStyle1.copyWith(
                     color: Colors.black,
                     fontSize: 18,
