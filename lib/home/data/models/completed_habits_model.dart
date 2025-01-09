@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'create_habit_model.dart'; // Import the CreateHabitModel
+import 'package:habit_tracker/home/home.dart';
 
 part 'completed_habits_model.freezed.dart';
 part 'completed_habits_model.g.dart';
