@@ -24,7 +24,6 @@ class ActionButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          color: Colors.black,
           size: 18,
         ),
       ),

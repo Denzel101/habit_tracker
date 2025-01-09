@@ -3,14 +3,14 @@ import 'package:habit_tracker/constants/constants.dart';
 
 class MenuOption extends StatelessWidget {
   const MenuOption({
-    required this.onTap,
     required this.leading,
     required this.title,
+    this.onTap,
     this.trailing,
     super.key,
   });
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Widget leading;
   final String title;
   final Widget? trailing;
@@ -26,7 +26,9 @@ class MenuOption extends StatelessWidget {
           height: 60,
           child: Center(
             child: ListTile(
-              tileColor: AppColors.greyColor,
+              tileColor: context.isDarkMode
+                  ? Colors.grey.shade800
+                  : AppColors.greyColor,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
@@ -36,7 +38,6 @@ class MenuOption extends StatelessWidget {
               title: Text(
                 title,
                 style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      color: Colors.black,
                       fontSize: 15,
                     ),
               ),

@@ -39,7 +39,8 @@ class CustomDropDownField<T> extends StatelessWidget {
         onTap: onTap,
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.greyColor,
+          fillColor:
+              context.isDarkMode ? Colors.grey.shade800 : AppColors.greyColor,
           enabled: enabled!,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           prefixIcon: suffixIcon,
@@ -47,7 +48,6 @@ class CustomDropDownField<T> extends StatelessWidget {
           labelText: label,
           labelStyle: const TextStyle(
             fontSize: 16,
-            color: Colors.black,
           ),
           hintStyle: AppStyles.kTextLabelStyle2.copyWith(
             fontWeight: FontWeight.w400,

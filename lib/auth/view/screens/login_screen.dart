@@ -181,15 +181,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Text(
                                   'Login',
-                                  style: AppStyles.kTextLabelStyle3,
+                                  style: AppStyles.kTextLabelStyle3.copyWith(
+                                    color: context.isDarkMode
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: size.width * 0.02,
                                 ),
-                                const Icon(
+                                Icon(
                                   Icons.arrow_forward_rounded,
-                                  color: Colors.white,
                                   size: 17,
+                                  color: context.isDarkMode
+                                      ? Colors.black
+                                      : Colors.white,
                                 ),
                               ],
                             ),

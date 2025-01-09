@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:habit_tracker/home/home.dart';
 import 'package:intl/intl.dart';
 
@@ -38,5 +39,12 @@ extension HabitFiltering on List<CreateHabitModel> {
       }
       return false;
     }).toList();
+  }
+}
+
+extension DarkMode on BuildContext {
+  bool get isDarkMode {
+    final brightness = Theme.of(this).brightness;
+    return brightness == Brightness.dark;
   }
 }

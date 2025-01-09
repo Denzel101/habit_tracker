@@ -68,7 +68,9 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
             },
             child: Text(
               'Continue',
-              style: AppStyles.kTextLabelStyle3,
+              style: AppStyles.kTextLabelStyle3.copyWith(
+                color: context.isDarkMode ? Colors.black : Colors.white,
+              ),
             ),
           ),
         ),
@@ -86,7 +88,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
               Text(
                 'Create habit',
                 style: AppStyles.kTextLabelStyle1.copyWith(
-                  color: Colors.black,
+                  color: context.isDarkMode ? Colors.white : Colors.black,
                   fontSize: 30,
                 ),
               ),
@@ -151,7 +153,6 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                       value: item,
                       child: Text(
                         item,
-                        style: const TextStyle(color: Colors.black),
                       ),
                     ),
                 ],

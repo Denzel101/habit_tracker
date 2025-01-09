@@ -14,7 +14,7 @@ Future<void> main() async {
 
   HabitTrackerConfig(
     values: HabitTrackerValues(
-      hiveBoxKey: 'ht_development_$packageVersion',
+      hiveBoxKey: 'ht_development',
       hiveBoxEncryptionKey: 'JxjJXBiUe9JLNk8FIIT0qSO2WQhzlqxj',
       buildFlavour: BuildFlavour.development,
     ),

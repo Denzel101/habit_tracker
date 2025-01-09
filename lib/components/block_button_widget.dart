@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/constants/constants.dart';
 
 class BlockButtonWidget extends StatelessWidget {
   const BlockButtonWidget({
     required this.child,
     this.onPressed,
-    this.color = Colors.black,
+    this.color,
     super.key,
     this.borderColor = Colors.transparent,
   });
@@ -20,7 +21,7 @@ class BlockButtonWidget extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       // padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      color: color,
+      color: color ?? (context.isDarkMode ? Colors.white : Colors.black),
       height: 49,
       disabledElevation: 0,
       disabledColor: Colors.grey,

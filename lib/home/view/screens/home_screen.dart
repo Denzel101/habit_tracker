@@ -45,8 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(AppStyles.kAppPadding),
               width: size.width,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: context.isDarkMode ? Colors.grey.shade800 : Colors.black,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Column(
@@ -55,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.centerRight,
                     child: Icon(
                       Icons.info_outline,
-                      color: Colors.white54,
                       size: 13,
+                      color: Colors.white,
                     ),
                   ),
                   Row(
@@ -79,7 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             'Notification!',
-                            style: AppStyles.kTextLabelStyle3,
+                            style: AppStyles.kTextLabelStyle3
+                                .copyWith(color: Colors.white),
                           ),
                           Text(
                             'Now is the time to read the book,\nyou can '
@@ -163,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   '${_selectedDay.toFullDay()} habit',
                   style: AppStyles.kTextLabelStyle1.copyWith(
-                    color: Colors.black,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
                     fontSize: 18,
                   ),
                 ),

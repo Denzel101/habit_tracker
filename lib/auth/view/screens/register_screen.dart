@@ -254,7 +254,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             loading: LoadingIndicator.new,
                             orElse: () => Text(
                               'Register',
-                              style: AppStyles.kTextLabelStyle3,
+                              style: AppStyles.kTextLabelStyle3.copyWith(
+                                color: context.isDarkMode
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
                             ),
                           ),
                         ),
