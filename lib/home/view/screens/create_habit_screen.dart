@@ -21,7 +21,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
   final _formKey = GlobalKey<FormState>();
   final List<CreateHabitModel> _createdHabits = [];
   String? _selectedFrequency;
-  DateTime? _selectedDateTime;
+  DateTime? selectedDateTime;
 
   @override
   void dispose() {
@@ -48,7 +48,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                     habitName: _nameController.text,
                     description: _descriptionController.text,
                     frequency: _selectedFrequency!,
-                    startDate: _selectedDateTime!,
+                    startDate: selectedDateTime!,
                     habitIcon: widget.chosenHabit.image,
                     habitLabel: widget.chosenHabit.habit,
                   ),
@@ -170,7 +170,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
               CustomTextField(
                 onTap: () async {
                   final result = await FunctionHelper.selectStartDate(context);
-                  _selectedDateTime = result;
+                  selectedDateTime = result;
                   _dateController.text =
                       '${result.day}-${result.month}-${result.year}';
                   setState(() {});
