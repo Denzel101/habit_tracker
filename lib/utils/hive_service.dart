@@ -15,13 +15,16 @@ abstract class HiveService {
   CreatedHabitsModel retrieveCreatedHabits();
   void persistCompletedHabits({required CompletedHabitModel completedHabit});
   CompletedHabitsModel retrieveCompletedHabits();
+  void persistDarkMode({bool isDarkMode = false});
+  bool retrieveDarkMode();
   void clearBox();
 }
 
 class HiveServiceImplementation implements HiveService {
   static const String userInfo = 'user-info';
   static const String habitsCreated = 'habits-created';
-  static const String habitsCompleted = 'habits=completed';
+  static const String habitsCompleted = 'habits-completed';
+  static const String darkMode = 'dark-mode';
 
   @override
   Future<void> initBoxes() async {
@@ -135,5 +138,19 @@ class HiveServiceImplementation implements HiveService {
       return habits;
     } catch (_) {}
     return CompletedHabitsModel();
+  }
+
+  @override
+  void persistDarkMode({bool isDarkMode = false}) {
+    Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
+        .put(darkMode, isDarkMode);
+  }
+
+  @override
+  bool retrieveDarkMode() {
+    final box =
+        Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey);
+    final isDarkMode = box.get(darkMode) as bool;
+    return isDarkMode;
   }
 }
