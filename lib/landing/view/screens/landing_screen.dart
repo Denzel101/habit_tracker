@@ -25,13 +25,15 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: context.isDarkMode ? Colors.black : Colors.white,
         iconSize: 30,
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: AppColors.greyColor,
+        selectedItemColor: context.isDarkMode ? Colors.white : Colors.black,
+        unselectedItemColor:
+            context.isDarkMode ? Colors.grey.shade800 : AppColors.greyColor,
         elevation: 0,
         onTap: (index) {
           setState(() => _currentIndex = index);

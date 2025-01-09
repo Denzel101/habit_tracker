@@ -15,7 +15,7 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.grey.shade900,
+    scaffoldBackgroundColor: Colors.black,
     primaryColor: Colors.white,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: GoogleFonts.poppins().fontFamily,

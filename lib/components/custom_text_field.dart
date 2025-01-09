@@ -58,7 +58,6 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         style: const TextStyle(
           height: 1,
-          color: Colors.black,
           fontWeight: FontWeight.w400,
           fontSize: 15,
         ),
@@ -79,7 +78,8 @@ class CustomTextField extends StatelessWidget {
         autovalidateMode: autovalidateMode,
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.greyColor,
+          fillColor:
+              context.isDarkMode ? Colors.grey.shade800 : AppColors.greyColor,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           labelText: label,
           prefixText: prefixText,
@@ -96,7 +96,6 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           labelStyle: const TextStyle(
             fontSize: 16,
-            color: Colors.black,
           ),
           hintStyle: AppStyles.kTextLabelStyle2.copyWith(
             fontWeight: FontWeight.w400,

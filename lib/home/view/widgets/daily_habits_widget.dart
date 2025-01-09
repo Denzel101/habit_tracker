@@ -65,7 +65,9 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
                               width: 150,
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFFAEDE6),
+                                color: context.isDarkMode
+                                    ? Colors.redAccent
+                                    : Colors.redAccent.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Column(
@@ -109,8 +111,10 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
                                         child: Container(
                                           height: 25,
                                           width: 25,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
+                                          decoration: BoxDecoration(
+                                            color: context.isDarkMode
+                                                ? Colors.grey.shade500
+                                                : Colors.white,
                                             shape: BoxShape.circle,
                                           ),
                                           child: Icon(
@@ -127,14 +131,16 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
                                   const Spacer(),
                                   Text(
                                     item.habitName,
-                                    style: AppStyles.kTextLabelStyle3.copyWith(
-                                      color: Colors.black,
-                                    ),
+                                    style:
+                                        AppStyles.kTextLabelStyle3.copyWith(),
                                   ),
                                   Text(
                                     item.description,
                                     style: AppStyles.kTextLabelStyle1.copyWith(
                                       fontSize: 13,
+                                      color: context.isDarkMode
+                                          ? Colors.grey.shade800
+                                          : AppColors.textGrey,
                                     ),
                                   ),
                                 ],

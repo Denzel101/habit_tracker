@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/auth/auth.dart';
-import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/home/home.dart';
@@ -57,21 +56,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(bottom: 10),
                   child: ListTile(
-                    tileColor: AppColors.secondaryActiveColor,
+                    tileColor: context.isDarkMode
+                        ? AppColors.activeColor
+                        : AppColors.secondaryActiveColor,
                     shape: RoundedRectangleBorder(
                       side: const BorderSide(color: AppColors.activeColor),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     leading: const Icon(
                       Icons.person_outline_rounded,
-                      color: Colors.black,
                       size: 28,
                     ),
                     title: Text(
                       authData?.username ?? '',
                       style:
                           Theme.of(context).textTheme.displayMedium!.copyWith(
-                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
@@ -80,13 +79,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       authData?.email ?? '',
                       style:
                           Theme.of(context).textTheme.displayMedium!.copyWith(
-                                color: Colors.grey.shade900,
                                 fontSize: 14,
                               ),
                     ),
-                    trailing: const Icon(
+                    trailing: Icon(
                       Icons.edit,
-                      color: AppColors.activeColor,
+                      color: context.isDarkMode
+                          ? AppColors.secondaryActiveColor
+                          : AppColors.activeColor,
                     ),
                   ),
                 );
@@ -165,16 +165,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Icon(Icons.login_outlined),
                   ),
                   title: 'Log Out',
-                  trailing: state.maybeWhen(
-                    loading: () => const LoadingIndicator(
-                      color: Colors.black,
-                      size: 10,
-                    ),
-                    orElse: () => Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: Colors.black.withValues(alpha: 0.9),
-                    ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.black.withValues(alpha: 0.9),
                   ),
                 );
               },
@@ -184,9 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Text(
               'Version $packageVersion',
-              style: AppStyles.kTextLabelStyle3.copyWith(
-                color: Colors.black,
-              ),
+              style: AppStyles.kTextLabelStyle3,
             ),
           ].animate(
             interval: const Duration(milliseconds: 50),

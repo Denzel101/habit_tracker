@@ -38,7 +38,9 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
                   },
             child: Text(
               'Get Started!',
-              style: AppStyles.kTextLabelStyle3,
+              style: AppStyles.kTextLabelStyle3.copyWith(
+                color: context.isDarkMode ? Colors.black : Colors.white,
+              ),
             ),
           ),
         ),
@@ -54,7 +56,7 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
             Text(
               'Choose habit',
               style: AppStyles.kTextLabelStyle1.copyWith(
-                color: Colors.black,
+                color: context.isDarkMode ? Colors.white : Colors.black,
                 fontSize: 30,
               ),
             ),
@@ -95,9 +97,7 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: isSelected
-                          ? AppColors.secondaryActiveColor
-                          : Colors.transparent,
+                      color: Colors.transparent,
                       border: Border.all(
                         color: isSelected
                             ? AppColors.activeColor
@@ -114,7 +114,9 @@ class _ChooseHabitScreenState extends State<ChooseHabitScreen> {
                         Text(
                           item.habit,
                           style: AppStyles.kTextLabelStyle1.copyWith(
-                            color: Colors.black,
+                            color: context.isDarkMode
+                                ? Colors.white
+                                : Colors.black,
                             fontSize: 15,
                           ),
                         ),

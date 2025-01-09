@@ -37,7 +37,6 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
                   Text(
                     'Analytics',
                     style: AppStyles.kTextLabelStyle3.copyWith(
-                      color: Colors.black,
                       fontSize: 20,
                     ),
                   ),
@@ -100,7 +99,7 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 20,
-            color: Colors.white,
+            color: context.isDarkMode ? Colors.black : Colors.white,
           ),
         ),
       ],
@@ -123,7 +122,8 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
               BarChartData(
                 barTouchData: BarTouchData(
                   touchTooltipData: BarTouchTooltipData(
-                    getTooltipColor: (_) => Colors.black,
+                    getTooltipColor: (_) =>
+                        context.isDarkMode ? Colors.white : Colors.black,
                     tooltipHorizontalAlignment: FLHorizontalAlignment.center,
                     tooltipMargin: -10,
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -148,7 +148,10 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
                       }
                       return BarTooltipItem(
                         '$weekDay\n',
-                        AppStyles.kTextLabelStyle3,
+                        AppStyles.kTextLabelStyle3.copyWith(
+                          color:
+                              context.isDarkMode ? Colors.black : Colors.white,
+                        ),
                         children: <TextSpan>[
                           TextSpan(
                             text: '${rod.toY} Habits',
