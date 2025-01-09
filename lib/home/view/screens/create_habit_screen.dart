@@ -56,7 +56,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
 
                 context
                     .read<UpdateHabitDetailsCubit>()
-                    .updateHabitDetails(createdHabits: _createdHabits);
+                    .updateHabitDetails(createdHabit: _createdHabits.last);
 
                 Navigator.pushNamedAndRemoveUntil(
                   context,

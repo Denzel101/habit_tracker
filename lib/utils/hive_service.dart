@@ -11,8 +11,8 @@ abstract class HiveService {
   Future<void> initBoxes();
   void persistUserInfo({required LoginResponseDto loginDetails});
   LoginResponseDto? retrieveUserInfo();
-  void persistCreatedHabits({required List<CreateHabitModel> createdHabits});
-  List<CreateHabitModel>? retrieveCreatedHabits();
+  void persistCreatedHabit({required CreateHabitModel createdHabit});
+  CreatedHabitsModel retrieveCreatedHabits();
   void clearBox();
 }
 
@@ -46,6 +46,9 @@ class HiveServiceImplementation implements HiveService {
       )
       ..registerAdapter(
         CreateHabitAdapter(),
+      )
+      ..registerAdapter(
+        CreateHabitsAdapter(),
       );
 
     await Hive.openBox<dynamic>(
@@ -78,22 +81,27 @@ class HiveServiceImplementation implements HiveService {
   }
 
   @override
-  void persistCreatedHabits({required List<CreateHabitModel> createdHabits}) {
+  void persistCreatedHabit({required CreateHabitModel createdHabit}) {
     try {
+      final existingHabits = retrieveCreatedHabits();
+
+      final newResults = {...existingHabits.result, createdHabit}.toList();
+
+      final newHabits = existingHabits.copyWith(result: newResults);
+
       Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
-          .put(habitsCreated, createdHabits);
+          .put(habitsCreated, newHabits);
     } catch (_) {}
   }
 
   @override
-  List<CreateHabitModel>? retrieveCreatedHabits() {
+  CreatedHabitsModel retrieveCreatedHabits() {
     try {
       final box =
           Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey);
-      final habits = box.get(habitsCreated) as List<CreateHabitModel>?;
-      if (habits == null) return null;
+      final habits = box.get(habitsCreated) as CreatedHabitsModel;
       return habits;
     } catch (_) {}
-    return null;
+    return CreatedHabitsModel();
   }
 }

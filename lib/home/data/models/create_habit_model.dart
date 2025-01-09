@@ -6,7 +6,7 @@ part 'create_habit_model.g.dart';
 @freezed
 class CreatedHabitsModel with _$CreatedHabitsModel {
   factory CreatedHabitsModel({
-    required List<CreateHabitModel> result,
+    @Default([]) List<CreateHabitModel> result,
   }) = _CreatedHabitsModel;
 
   factory CreatedHabitsModel.fromJson(Map<String, dynamic> json) =>

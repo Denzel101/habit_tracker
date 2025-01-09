@@ -14,15 +14,17 @@ class UpdateHabitDetailsCubit extends Cubit<UpdateHabitDetailsState> {
 
   late HiveService _hiveService;
 
-  void updateHabitDetails({required List<CreateHabitModel> createdHabits}) {
+  void updateHabitDetails({required CreateHabitModel createdHabit}) {
     emit(const UpdateHabitDetailsState.loading());
-    _hiveService.persistCreatedHabits(createdHabits: createdHabits);
-    final storedHabitDetails = _hiveService.retrieveCreatedHabits()!;
+    _hiveService.persistCreatedHabit(createdHabit: createdHabit);
+    final storedHabitDetails = _hiveService.retrieveCreatedHabits();
     emit(UpdateHabitDetailsState.loaded(createdHabits: storedHabitDetails));
   }
 
   void retrieveHabitDetails() {
-    final storedHabitDetails = _hiveService.retrieveCreatedHabits()!;
-    emit(UpdateHabitDetailsState.loaded(createdHabits: storedHabitDetails));
+    final storedHabitDetails = _hiveService.retrieveCreatedHabits();
+    emit(
+      UpdateHabitDetailsState.loaded(createdHabits: storedHabitDetails),
+    );
   }
 }

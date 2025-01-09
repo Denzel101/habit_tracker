@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/home/home.dart';
@@ -13,7 +14,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late int _selectedIndex = 0;
-  final List<DailyHabitModel> _completedHabits = [];
+  final List<CreateHabitModel> _completedHabits = [];
+
+  @override
+  void initState() {
+    context.read<UpdateHabitDetailsCubit>().retrieveHabitDetails();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,80 +174,97 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: size.height * 0.02,
             ),
-            AlignedGridView.count(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              shrinkWrap: true,
-              itemCount: dailyHabits.length,
-              itemBuilder: (context, index) {
-                final item = dailyHabits[index];
-                final isSelected = _completedHabits.contains(item);
-                return Container(
-                  height: 170,
-                  width: 150,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: item.color,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            item.image,
-                            height: 40,
+            BlocBuilder<UpdateHabitDetailsCubit, UpdateHabitDetailsState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: SizedBox.new,
+                  loaded: (response) => response.result.isEmpty
+                      ? Center(
+                          child: Text(
+                            'Nothing to see here 😊',
+                            style: AppStyles.kTextLabelStyle2
+                                .copyWith(color: Colors.black),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              switch (isSelected) {
-                                case true:
-                                  _completedHabits.remove(item);
-                                case false:
-                                  _completedHabits.add(item);
-                              }
+                        )
+                      : AlignedGridView.count(
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          shrinkWrap: true,
+                          itemCount: response.result.length,
+                          itemBuilder: (context, index) {
+                            final item = response.result[index];
+                            final isSelected = _completedHabits.contains(item);
+                            return Container(
+                              height: 170,
+                              width: 150,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFAEDE6),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Image.asset(
+                                        item.habitIcon,
+                                        height: 40,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          switch (isSelected) {
+                                            case true:
+                                              _completedHabits.remove(item);
+                                            case false:
+                                              _completedHabits.add(item);
+                                          }
 
-                              setState(() {});
-                            },
-                            child: Container(
-                              height: 25,
-                              width: 25,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.check,
+                                            color: isSelected
+                                                ? Colors.deepOrange
+                                                : AppColors.greyColor,
+                                            size: 17,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    item.habitName,
+                                    style: AppStyles.kTextLabelStyle3.copyWith(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Text(
+                                    item.description,
+                                    style: AppStyles.kTextLabelStyle1.copyWith(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: Icon(
-                                Icons.check,
-                                color: isSelected
-                                    ? Colors.deepOrange
-                                    : AppColors.greyColor,
-                                size: 17,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      Text(
-                        item.habit,
-                        style: AppStyles.kTextLabelStyle3.copyWith(
-                          color: Colors.black,
+                            );
+                          },
                         ),
-                      ),
-                      Text(
-                        item.goal,
-                        style: AppStyles.kTextLabelStyle1.copyWith(
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
-                  ),
                 );
               },
             ),

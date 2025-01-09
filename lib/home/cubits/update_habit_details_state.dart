@@ -5,6 +5,6 @@ class UpdateHabitDetailsState with _$UpdateHabitDetailsState {
   const factory UpdateHabitDetailsState.initial() = _Initial;
   const factory UpdateHabitDetailsState.loading() = _Loading;
   const factory UpdateHabitDetailsState.loaded({
-    required List<CreateHabitModel> createdHabits,
+    required CreatedHabitsModel createdHabits,
   }) = _Loaded;
 }

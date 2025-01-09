@@ -41,3 +41,22 @@ class CreateHabitAdapter extends TypeAdapter<CreateHabitModel> {
     writer.write(json.encode(obj.toJson()));
   }
 }
+
+class CreateHabitsAdapter extends TypeAdapter<CreatedHabitsModel> {
+  @override
+  final typeId = 3;
+
+  @override
+  CreatedHabitsModel read(BinaryReader reader) {
+    return CreatedHabitsModel.fromJson(
+      Map<String, dynamic>.of(
+        json.decode(reader.read() as String) as Map<String, dynamic>,
+      ),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CreatedHabitsModel obj) {
+    writer.write(json.encode(obj.toJson()));
+  }
+}
