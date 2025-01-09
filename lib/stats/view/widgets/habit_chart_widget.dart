@@ -114,13 +114,10 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
         return state.maybeWhen(
           orElse: SizedBox.new,
           loaded: (result) {
-            // Prepare data for the bar chart
-            final weekData =
-                List.generate(7, (_) => 0); // Index 0 = Monday, ..., 6 = Sunday
+            final weekData = List.generate(7, (_) => 0);
             for (final habitDay in result.completedHabits) {
-              final weekdayIndex =
-                  habitDay.day.weekday - 1; // Convert to Monday-based index
-              weekData[weekdayIndex] += habitDay.habits.length;
+              final index = habitDay.day.weekday - 1;
+              weekData[index] += habitDay.habits.length;
             }
             return BarChart(
               BarChartData(
