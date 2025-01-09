@@ -26,5 +26,10 @@ class Singletons {
             hiveService: locator<HiveService>(),
           ),
         ),
+        BlocProvider<CompleteHabitDetailsCubit>(
+          create: (context) => CompleteHabitDetailsCubit(
+            hiveService: locator<HiveService>(),
+          ),
+        ),
       ];
 }

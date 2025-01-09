@@ -13,12 +13,15 @@ abstract class HiveService {
   LoginResponseDto? retrieveUserInfo();
   void persistCreatedHabit({required CreateHabitModel createdHabit});
   CreatedHabitsModel retrieveCreatedHabits();
+  void persistCompletedHabits({required CompletedHabitModel completedHabit});
+  CompletedHabitsModel retrieveCompletedHabits();
   void clearBox();
 }
 
 class HiveServiceImplementation implements HiveService {
   static const String userInfo = 'user-info';
   static const String habitsCreated = 'habits-created';
+  static const String habitsCompleted = 'habits=completed';
 
   @override
   Future<void> initBoxes() async {
@@ -49,6 +52,9 @@ class HiveServiceImplementation implements HiveService {
       )
       ..registerAdapter(
         CreateHabitsAdapter(),
+      )
+      ..registerAdapter(
+        CompletedHabitsAdapter(),
       );
 
     await Hive.openBox<dynamic>(
@@ -103,5 +109,31 @@ class HiveServiceImplementation implements HiveService {
       return habits;
     } catch (_) {}
     return CreatedHabitsModel();
+  }
+
+  @override
+  void persistCompletedHabits({required CompletedHabitModel completedHabit}) {
+    try {
+      final existingHabits = retrieveCompletedHabits();
+
+      final newResults =
+          {...existingHabits.completedHabits, completedHabit}.toList();
+
+      final newHabits = existingHabits.copyWith(completedHabits: newResults);
+
+      Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
+          .put(habitsCompleted, newHabits);
+    } catch (_) {}
+  }
+
+  @override
+  CompletedHabitsModel retrieveCompletedHabits() {
+    try {
+      final box =
+          Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey);
+      final habits = box.get(habitsCompleted) as CompletedHabitsModel;
+      return habits;
+    } catch (_) {}
+    return CompletedHabitsModel();
   }
 }
