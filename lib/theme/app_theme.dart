@@ -12,4 +12,15 @@ class AppTheme {
       primary: Colors.grey,
     ),
   );
+
+  static final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Colors.grey.shade900,
+    primaryColor: Colors.white,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    colorScheme: const ColorScheme.dark(
+      primary: Colors.grey,
+    ),
+  );
 }
