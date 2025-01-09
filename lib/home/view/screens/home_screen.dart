@@ -34,8 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: size.height * 0.07,
             ),
-            const TopInfoWidget(
-              title: 'Monday, 6',
+            TopInfoWidget(
+              title: DateTime.now().toCurrentDay(),
             ),
             SizedBox(
               height: size.height * 0.04,
