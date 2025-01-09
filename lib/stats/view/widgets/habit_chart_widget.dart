@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/constants/constants.dart';
+import 'package:habit_tracker/home/home.dart';
 
 class HabitChartWidget extends StatefulWidget {
   const HabitChartWidget({super.key});
@@ -42,11 +44,19 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
                   SizedBox(
                     height: size.height * 0.004,
                   ),
-                  Text(
-                    '67 Habits',
-                    style: AppStyles.kTextLabelStyle3.copyWith(
-                      color: AppColors.activeColor,
-                    ),
+                  BlocBuilder<CompleteHabitDetailsCubit,
+                      CompleteHabitDetailsState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: SizedBox.new,
+                        loaded: (result) => Text(
+                          '${result.completedHabits.length} Habits',
+                          style: AppStyles.kTextLabelStyle3.copyWith(
+                            color: AppColors.activeColor,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 38,
@@ -54,10 +64,7 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: BarChart(
-                        mainBarData(),
-                        duration: const Duration(milliseconds: 250),
-                      ),
+                      child: analyticsBarChart(),
                     ),
                   ),
                   const SizedBox(
@@ -101,126 +108,103 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
     );
   }
 
-  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
-        switch (i) {
-          case 0:
-            return makeGroupData(0, 5, isTouched: i == touchedIndex);
-          case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
-          case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
-          case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
-          case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
-          case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
-          case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
-          default:
-            return throw Error();
-        }
-      });
-
-  BarChartData mainBarData() {
-    return BarChartData(
-      barTouchData: BarTouchData(
-        touchTooltipData: BarTouchTooltipData(
-          getTooltipColor: (_) => Colors.black,
-          tooltipHorizontalAlignment: FLHorizontalAlignment.center,
-          tooltipMargin: -10,
-          getTooltipItem: (group, groupIndex, rod, rodIndex) {
-            String weekDay;
-            switch (group.x) {
-              case 0:
-                weekDay = 'Monday';
-              case 1:
-                weekDay = 'Tuesday';
-              case 2:
-                weekDay = 'Wednesday';
-              case 3:
-                weekDay = 'Thursday';
-              case 4:
-                weekDay = 'Friday';
-              case 5:
-                weekDay = 'Saturday';
-              case 6:
-                weekDay = 'Sunday';
-              default:
-                throw Error();
+  Widget analyticsBarChart() {
+    return BlocBuilder<CompleteHabitDetailsCubit, CompleteHabitDetailsState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: SizedBox.new,
+          loaded: (result) {
+            // Prepare data for the bar chart
+            final weekData =
+                List.generate(7, (_) => 0); // Index 0 = Monday, ..., 6 = Sunday
+            for (final habitDay in result.completedHabits) {
+              final weekdayIndex =
+                  habitDay.day.weekday - 1; // Convert to Monday-based index
+              weekData[weekdayIndex] += habitDay.habits.length;
             }
-            return BarTooltipItem(
-              '$weekDay\n',
-              AppStyles.kTextLabelStyle3,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '${rod.toY - 1} Habits',
-                  style: AppStyles.kTextLabelStyle2.copyWith(
-                    color: AppColors.textGrey,
+            return BarChart(
+              BarChartData(
+                barTouchData: BarTouchData(
+                  touchTooltipData: BarTouchTooltipData(
+                    getTooltipColor: (_) => Colors.black,
+                    tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+                    tooltipMargin: -10,
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      String weekDay;
+                      switch (group.x) {
+                        case 0:
+                          weekDay = 'Monday';
+                        case 1:
+                          weekDay = 'Tuesday';
+                        case 2:
+                          weekDay = 'Wednesday';
+                        case 3:
+                          weekDay = 'Thursday';
+                        case 4:
+                          weekDay = 'Friday';
+                        case 5:
+                          weekDay = 'Saturday';
+                        case 6:
+                          weekDay = 'Sunday';
+                        default:
+                          throw Error();
+                      }
+                      return BarTooltipItem(
+                        '$weekDay\n',
+                        AppStyles.kTextLabelStyle3,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '${rod.toY} Habits',
+                            style: AppStyles.kTextLabelStyle2.copyWith(
+                              color: AppColors.textGrey,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
+                  touchCallback: (FlTouchEvent event, barTouchResponse) {
+                    setState(() {
+                      if (!event.isInterestedForInteractions ||
+                          barTouchResponse == null ||
+                          barTouchResponse.spot == null) {
+                        touchedIndex = -1;
+                        return;
+                      }
+                      touchedIndex =
+                          barTouchResponse.spot!.touchedBarGroupIndex;
+                    });
+                  },
                 ),
-              ],
+                titlesData: const FlTitlesData(
+                  rightTitles: AxisTitles(),
+                  topTitles: AxisTitles(),
+                  bottomTitles: AxisTitles(),
+                  leftTitles: AxisTitles(),
+                ),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                barGroups: weekData
+                    .asMap()
+                    .entries
+                    .map(
+                      (entry) => makeGroupData(
+                        entry.key,
+                        entry.value.toDouble(),
+                        isTouched: entry.key == touchedIndex,
+                      ),
+                    )
+                    .toList(),
+                gridData: const FlGridData(
+                  drawVerticalLine: false,
+                  horizontalInterval: 3,
+                ),
+              ),
             );
           },
-        ),
-        touchCallback: (FlTouchEvent event, barTouchResponse) {
-          setState(() {
-            if (!event.isInterestedForInteractions ||
-                barTouchResponse == null ||
-                barTouchResponse.spot == null) {
-              touchedIndex = -1;
-              return;
-            }
-            touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
-          });
-        },
-      ),
-      titlesData: const FlTitlesData(
-        rightTitles: AxisTitles(),
-        topTitles: AxisTitles(),
-        bottomTitles: AxisTitles(),
-        leftTitles: AxisTitles(),
-      ),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      barGroups: showingGroups(),
-      gridData: const FlGridData(
-        drawVerticalLine: false,
-        horizontalInterval: 3,
-      ),
-    );
-  }
-
-  Widget getTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Colors.grey,
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    Widget text;
-    switch (value.toInt()) {
-      case 0:
-        text = const Text('M', style: style);
-      case 1:
-        text = const Text('T', style: style);
-      case 2:
-        text = const Text('W', style: style);
-      case 3:
-        text = const Text('T', style: style);
-      case 4:
-        text = const Text('F', style: style);
-      case 5:
-        text = const Text('S', style: style);
-      case 6:
-        text = const Text('S', style: style);
-      default:
-        text = const Text('', style: style);
-    }
-    return SideTitleWidget(
-      meta: meta,
-      space: 16,
-      child: text,
+        );
+      },
     );
   }
 }
