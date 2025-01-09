@@ -7,7 +7,6 @@ import 'package:habit_tracker/bootstrap.dart';
 import 'package:habit_tracker/constants/constants.dart';
 import 'package:habit_tracker/firebase_options.dart';
 import 'package:habit_tracker/utils/utils.dart';
-import 'package:habit_tracker/versioning/build_version.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
