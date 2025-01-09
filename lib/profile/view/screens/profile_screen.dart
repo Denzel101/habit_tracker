@@ -20,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _hiveService = locator<HiveService>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -49,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 HabitTrackerConfig.instance!.values.hiveBoxKey,
               ).listenable(),
               builder: (context, _, __) {
-                final authData = locator<HiveService>().retrieveUserInfo();
+                final authData = _hiveService.retrieveUserInfo();
                 return Container(
                   width: size.width,
                   height: 80,
@@ -91,19 +92,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
             ),
-            MenuOption(
-              onTap: () {},
-              leading: const SizedBox(
-                height: 24,
-                width: 24,
-                child: Icon(Icons.brightness_2_outlined),
-              ),
-              title: 'Dark Mode',
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                size: 16,
-                color: Colors.black.withValues(alpha: 0.9),
-              ),
+            ValueListenableBuilder(
+              valueListenable: Hive.box<dynamic>(
+                HabitTrackerConfig.instance!.values.hiveBoxKey,
+              ).listenable(),
+              builder: (context, _, __) {
+                final isDarkMode = _hiveService.retrieveDarkMode();
+                return MenuOption(
+                  leading: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: Icon(
+                      isDarkMode ?? false
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined,
+                    ),
+                  ),
+                  title: isDarkMode ?? false ? 'Light Mode' : 'Dark Mode',
+                  trailing: Switch(
+                    inactiveTrackColor: Colors.white,
+                    inactiveThumbColor: Colors.black,
+                    activeTrackColor: Colors.black,
+                    activeColor: Colors.white,
+                    value: isDarkMode ?? false,
+                    onChanged: (value) => setState(() {
+                      _hiveService.persistDarkMode(isDarkMode: value);
+                    }),
+                  ),
+                );
+              },
             ),
             MenuOption(
               onTap: () {},

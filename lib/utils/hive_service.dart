@@ -15,8 +15,8 @@ abstract class HiveService {
   CreatedHabitsModel retrieveCreatedHabits();
   void persistCompletedHabits({required CompletedHabitModel completedHabit});
   CompletedHabitsModel retrieveCompletedHabits();
-  void persistDarkMode({bool isDarkMode = false});
-  bool retrieveDarkMode();
+  void persistDarkMode({required bool isDarkMode});
+  bool? retrieveDarkMode();
   void clearBox();
 }
 
@@ -141,16 +141,17 @@ class HiveServiceImplementation implements HiveService {
   }
 
   @override
-  void persistDarkMode({bool isDarkMode = false}) {
+  void persistDarkMode({required bool isDarkMode}) {
     Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
         .put(darkMode, isDarkMode);
   }
 
   @override
-  bool retrieveDarkMode() {
+  bool? retrieveDarkMode() {
     final box =
         Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey);
-    final isDarkMode = box.get(darkMode) as bool;
+    final isDarkMode = box.get(darkMode) as bool?;
+    if (isDarkMode == null) return null;
     return isDarkMode;
   }
 }

@@ -3,14 +3,14 @@ import 'package:habit_tracker/constants/constants.dart';
 
 class MenuOption extends StatelessWidget {
   const MenuOption({
-    required this.onTap,
+    this.onTap,
     required this.leading,
     required this.title,
     this.trailing,
     super.key,
   });
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Widget leading;
   final String title;
   final Widget? trailing;
