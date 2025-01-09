@@ -9,8 +9,10 @@ class AppRouter {
   static const String landingRoute = 'landing-route';
   static const String loginRoute = 'login-route';
   static const String registerRoute = 'register-route';
+  static const String createHabitRoute = 'create-habit-route';
 
   static Route<String>? onGenerateRoute(RouteSettings settings) {
+    final args = settings.arguments;
     switch (settings.name) {
       case homeRoute:
         return MaterialPageRoute(
@@ -35,6 +37,14 @@ class AppRouter {
       case registerRoute:
         return MaterialPageRoute(
           builder: (context) => const RegisterScreen(),
+        );
+
+      case createHabitRoute:
+        final chosenHabit = args! as ChooseHabitModel;
+        return MaterialPageRoute(
+          builder: (context) => CreateHabitScreen(
+            chosenHabit: chosenHabit,
+          ),
         );
     }
 

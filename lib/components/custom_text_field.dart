@@ -79,7 +79,7 @@ class CustomTextField extends StatelessWidget {
         autovalidateMode: autovalidateMode,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColors.greyColor,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           labelText: label,
           prefixText: prefixText,
@@ -91,8 +91,8 @@ class CustomTextField extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontSize: 15,
           ),
-          prefixIconColor: AppColors.greyColor,
-          suffixIconColor: AppColors.greyColor,
+          prefixIconColor: AppColors.textGrey,
+          suffixIconColor: AppColors.textGrey,
           hintText: hintText,
           labelStyle: const TextStyle(
             fontSize: 16,

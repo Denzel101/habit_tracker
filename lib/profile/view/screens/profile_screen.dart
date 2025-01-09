@@ -8,7 +8,9 @@ import 'package:habit_tracker/helpers/helpers.dart';
 import 'package:habit_tracker/home/home.dart';
 import 'package:habit_tracker/profile/profile.dart';
 import 'package:habit_tracker/router/router.dart';
+import 'package:habit_tracker/utils/utils.dart';
 import 'package:habit_tracker/versioning/build_version.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -42,28 +44,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: size.height * 0.04,
             ),
-            Container(
-              width: size.width,
-              height: 80,
-              margin: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                color: AppColors.secondaryActiveColor,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                border: Border.all(color: AppColors.activeColor),
-              ),
-              child: GestureDetector(
-                onTap: () {},
-                child: Center(
+            ValueListenableBuilder(
+              valueListenable: Hive.box<dynamic>(
+                HabitTrackerConfig.instance!.values.hiveBoxKey,
+              ).listenable(),
+              builder: (context, _, __) {
+                final authData = locator<HiveService>().retrieveUserInfo();
+                return Container(
+                  width: size.width,
+                  height: 80,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(bottom: 10),
                   child: ListTile(
+                    tileColor: AppColors.secondaryActiveColor,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: AppColors.activeColor),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     leading: const Icon(
                       Icons.person_outline_rounded,
                       color: Colors.black,
                       size: 28,
                     ),
                     title: Text(
-                      'Denzel Gatugu',
+                      authData?.username ?? '',
                       style:
                           Theme.of(context).textTheme.displayMedium!.copyWith(
                                 color: Colors.black,
@@ -72,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                     ),
                     subtitle: Text(
-                      'denzelgatugu@gmail.com',
+                      authData?.email ?? '',
                       style:
                           Theme.of(context).textTheme.displayMedium!.copyWith(
                                 color: Colors.grey.shade900,
@@ -84,8 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: AppColors.activeColor,
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
             MenuOption(
               onTap: () {},
@@ -130,6 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       AppRouter.loginRoute,
                       (route) => false,
                     );
+                    locator<HiveService>().clearBox();
                   },
                 );
               },
