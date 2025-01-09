@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:habit_tracker/components/components.dart';
 import 'package:habit_tracker/constants/constants.dart';
@@ -191,7 +192,13 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
               SizedBox(
                 height: size.height * 0.04,
               ),
-            ],
+            ].animate(
+              interval: const Duration(milliseconds: 50),
+              effects: [
+                const FadeEffect(),
+                const SlideEffect(),
+              ],
+            ),
           ),
         ),
       ),

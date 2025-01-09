@@ -1,3 +1,4 @@
+import 'package:habit_tracker/home/home.dart';
 import 'package:intl/intl.dart';
 
 extension StringExtension on String {
@@ -22,5 +23,20 @@ extension DateTimeFormatting on DateTime {
 
   String toFullDay() {
     return DateFormat('EEEE').format(this);
+  }
+}
+
+extension HabitFiltering on List<CreateHabitModel> {
+  List<CreateHabitModel> filterHabits(DateTime selectedDay) {
+    return where((habit) {
+      if (habit.frequency == 'Daily') {
+        return habit.startDate.isBefore(selectedDay) ||
+            habit.startDate.isAtSameMomentAs(selectedDay);
+      } else if (habit.frequency == 'Weekly') {
+        final daysDifference = selectedDay.difference(habit.startDate).inDays;
+        return daysDifference >= 0 && daysDifference % 7 == 0;
+      }
+      return false;
+    }).toList();
   }
 }
