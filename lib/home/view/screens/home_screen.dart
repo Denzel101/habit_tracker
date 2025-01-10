@@ -14,7 +14,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _today = DateTime.now();
-  var _selectedDay = DateTime.now();
+  late var _selectedDay = DateTime(
+    _today.year,
+    _today.month,
+    _today.day,
+  );
   final _currentWeek = FunctionHelper.getCurrentWeek();
 
   @override

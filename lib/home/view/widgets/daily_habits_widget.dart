@@ -14,6 +14,12 @@ class DailyHabitsWidget extends StatefulWidget {
 }
 
 class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
+  bool isSameDay({required DateTime date1, required DateTime date2}) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UpdateHabitDetailsCubit, UpdateHabitDetailsState>(
@@ -28,8 +34,7 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
                 ? Center(
                     child: Text(
                       'Nothing to see here 😊',
-                      style: AppStyles.kTextLabelStyle2
-                          .copyWith(color: Colors.black),
+                      style: AppStyles.kTextLabelStyle2,
                     ),
                   )
                 : BlocBuilder<CompleteHabitDetailsCubit,
@@ -50,8 +55,10 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
 
                             final completedHabitsForDay =
                                 result.completedHabits.firstWhere(
-                              (habit) => habit.day
-                                  .isAtSameMomentAs(widget.selectedDay),
+                              (habit) => isSameDay(
+                                date1: habit.day,
+                                date2: widget.selectedDay,
+                              ),
                               orElse: () => CompletedHabitModel(
                                 day: widget.selectedDay,
                                 habits: [],
