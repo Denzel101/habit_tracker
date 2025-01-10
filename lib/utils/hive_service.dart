@@ -58,6 +58,9 @@ class HiveServiceImplementation implements HiveService {
       )
       ..registerAdapter(
         CompletedHabitsAdapter(),
+      )
+      ..registerAdapter(
+        CompletedHabitAdapter(),
       );
 
     await Hive.openBox<dynamic>(

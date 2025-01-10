@@ -19,6 +19,7 @@ class FunctionHelper {
 
   static List<DateTime> getCurrentWeek() {
     final now = DateTime.now();
+
     final startDate = DateTime(now.year, now.month, now.day);
     final startOfWeek = startDate.subtract(
       Duration(days: startDate.weekday - 1),
