@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '873133403502',
     projectId: 'habit-tracker-2ee7e',
     storageBucket: 'habit-tracker-2ee7e.firebasestorage.app',
+    iosClientId: '873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com',
     iosBundleId: 'com.example.verygoodcore.habit-tracker',
   );
+
 }

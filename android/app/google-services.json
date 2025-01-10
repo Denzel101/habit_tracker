@@ -12,7 +12,12 @@
           "package_name": "com.example.verygoodcore.habit_tracker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +48,12 @@
           "package_name": "com.example.verygoodcore.habit_tracker.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -39,7 +61,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     },
@@ -50,7 +84,12 @@
           "package_name": "com.example.verygoodcore.habit_tracker.stg"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -58,7 +97,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     }
