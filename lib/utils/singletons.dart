@@ -31,5 +31,11 @@ class Singletons {
             hiveService: locator<HiveService>(),
           ),
         ),
+        BlocProvider<GoogleSignInCubit>(
+          create: (context) => GoogleSignInCubit(
+            authRepository: locator<AuthRepository>(),
+            hiveService: locator<HiveService>(),
+          ),
+        ),
       ];
 }

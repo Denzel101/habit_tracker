@@ -12,7 +12,44 @@
           "package_name": "com.example.verygoodcore.habit_tracker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-6pgb1vlfqhb394dhuailmbi6qf770hvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker",
+            "certificate_hash": "c10f5e3324ec33f88f7a542243c4a784520b92b2"
+          }
+        },
+        {
+          "client_id": "873133403502-bkku4iaul4t397vrlm95d8fen1otj0k5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker",
+            "certificate_hash": "5bcaee655bcbe5573ceca02f984629c778624114"
+          }
+        },
+        {
+          "client_id": "873133403502-d338dkjhret8flu46eepvmnbtjslqc03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker",
+            "certificate_hash": "7d49d4f2f3ea7eb9807709d7cfe16f61afd40266"
+          }
+        },
+        {
+          "client_id": "873133403502-vs5d5spvgh5e8fsd2vkstnrg6iir1gfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker",
+            "certificate_hash": "c4ba8d5a08141ad10ab0c66cb8867c85edc9cca9"
+          }
+        },
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -20,7 +57,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +80,44 @@
           "package_name": "com.example.verygoodcore.habit_tracker.dev"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-atars339gv4573kbmmilmvhfl4hbornn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.dev",
+            "certificate_hash": "c4ba8d5a08141ad10ab0c66cb8867c85edc9cca9"
+          }
+        },
+        {
+          "client_id": "873133403502-qabf342mm3t2s54sqka837k58lcss9lv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.dev",
+            "certificate_hash": "5bcaee655bcbe5573ceca02f984629c778624114"
+          }
+        },
+        {
+          "client_id": "873133403502-sn9352dk01e0hr24g6fof8024bv3uvns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.dev",
+            "certificate_hash": "7d49d4f2f3ea7eb9807709d7cfe16f61afd40266"
+          }
+        },
+        {
+          "client_id": "873133403502-u3vsabjr11kq4bh2ef4bcaqtbgc4o8ej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.dev",
+            "certificate_hash": "c10f5e3324ec33f88f7a542243c4a784520b92b2"
+          }
+        },
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -39,7 +125,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     },
@@ -50,7 +148,44 @@
           "package_name": "com.example.verygoodcore.habit_tracker.stg"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "873133403502-57pdoj37lpe764fichjete420l4uh565.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.stg",
+            "certificate_hash": "5bcaee655bcbe5573ceca02f984629c778624114"
+          }
+        },
+        {
+          "client_id": "873133403502-6h8h4ilgc2i13q680lrq14ib6eg01pkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.stg",
+            "certificate_hash": "7d49d4f2f3ea7eb9807709d7cfe16f61afd40266"
+          }
+        },
+        {
+          "client_id": "873133403502-c1h0ms67m726mdrlhu36bhhmhikmjhtv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.stg",
+            "certificate_hash": "c10f5e3324ec33f88f7a542243c4a784520b92b2"
+          }
+        },
+        {
+          "client_id": "873133403502-p9jobnkjr502ngreine5m0t8fthm05ql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.habit_tracker.stg",
+            "certificate_hash": "c4ba8d5a08141ad10ab0c66cb8867c85edc9cca9"
+          }
+        },
+        {
+          "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBD5vWPQwDx5775KfCHz0c-CaYI1a5TXcs"
@@ -58,7 +193,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873133403502-ag8m3ik6ntu2d29e5c4e17r1om3vb8gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873133403502-k702q1gqj65fscs72t51rrb1b4r51rkl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.habit-tracker"
+              }
+            }
+          ]
         }
       }
     }
