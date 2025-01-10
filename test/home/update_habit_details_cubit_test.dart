@@ -11,7 +11,7 @@ class MockUser extends Mock implements User {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  group('CompleteHabitDetails Save Case', () {
+  group('UpdateHabitDetails Save Case', () {
     final mockHiveService = MockHiveService();
     const habitLabel = 'Test';
     const habitIcon = 'path/path.png';
