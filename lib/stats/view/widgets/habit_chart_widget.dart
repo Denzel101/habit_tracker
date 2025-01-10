@@ -154,7 +154,7 @@ class HabitChartWidgetState extends State<HabitChartWidget> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: '${rod.toY} Habits',
+                            text: '${rod.toY - 1} Habits',
                             style: AppStyles.kTextLabelStyle2.copyWith(
                               color: AppColors.textGrey,
                             ),

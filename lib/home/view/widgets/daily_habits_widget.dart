@@ -34,8 +34,7 @@ class _DailyHabitsWidgetState extends State<DailyHabitsWidget> {
                 ? Center(
                     child: Text(
                       'Nothing to see here 😊',
-                      style: AppStyles.kTextLabelStyle2
-                          .copyWith(color: Colors.black),
+                      style: AppStyles.kTextLabelStyle2,
                     ),
                   )
                 : BlocBuilder<CompleteHabitDetailsCubit,

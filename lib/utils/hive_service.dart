@@ -131,7 +131,9 @@ class HiveServiceImplementation implements HiveService {
           habit.day.day,
         );
 
-        habitsMap[habitDay] = [...habit.habits];
+        habitsMap[habitDay] = [
+          ...habit.habits,
+        ];
       }
 
       final newResults = [
@@ -139,8 +141,10 @@ class HiveServiceImplementation implements HiveService {
           CompletedHabitModel(day: date, habits: habits),
       ];
 
-      Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
-          .put(habitsCompleted, newResults);
+      Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey).put(
+        habitsCompleted,
+        CompletedHabitsModel(completedHabits: newResults),
+      );
     } catch (_) {}
   }
 
