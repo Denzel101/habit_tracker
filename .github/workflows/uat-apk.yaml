@@ -57,7 +57,7 @@ jobs:
         run: flutter build apk  --flavor development --target lib/main_development.dart --obfuscate --split-debug-info=debug-symbols
 
       - name: Upload APK to Github Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: habit-tracker-app
           path: build/app/outputs/flutter-apk/app-development-release.apk
