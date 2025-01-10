@@ -119,13 +119,25 @@ class HiveServiceImplementation implements HiveService {
     try {
       final existingHabits = retrieveCompletedHabits();
 
-      final newResults =
-          {...existingHabits.completedHabits, completedHabit}.toList();
+      final habitsMap = <DateTime, List<CreateHabitModel>>{};
+      final allHabits = [...existingHabits.completedHabits, completedHabit];
+      for (final habit in allHabits) {
+        final habitDay = DateTime(
+          habit.day.year,
+          habit.day.month,
+          habit.day.day,
+        );
 
-      final newHabits = existingHabits.copyWith(completedHabits: newResults);
+        habitsMap[habitDay] = [...habit.habits];
+      }
+
+      final newResults = [
+        for (final MapEntry(key: date, value: habits) in habitsMap.entries)
+          CompletedHabitModel(day: date, habits: habits),
+      ];
 
       Hive.box<dynamic>(HabitTrackerConfig.instance!.values.hiveBoxKey)
-          .put(habitsCompleted, newHabits);
+          .put(habitsCompleted, newResults);
     } catch (_) {}
   }
 
