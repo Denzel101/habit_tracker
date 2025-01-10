@@ -2,18 +2,15 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:habit_tracker/auth/auth.dart';
-import 'package:habit_tracker/utils/utils.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
-
-class MockHiveService extends Mock implements HiveService {}
 
 class MockUser extends Mock implements User {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  group('LogUserCubit Success Cubit', () {
+  group('LogUserCubit Success Case', () {
     final mockAuthRepository = MockAuthRepository();
 
     when(

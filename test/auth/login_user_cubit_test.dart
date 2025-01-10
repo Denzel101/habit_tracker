@@ -13,7 +13,7 @@ class MockUser extends Mock implements User {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  group('LoginUserCubit Success Cubit', () {
+  group('LoginUserCubit Success Case', () {
     final mockAuthRepository = MockAuthRepository();
     final mockHiveService = MockHiveService();
     final mockUser = MockUser();
