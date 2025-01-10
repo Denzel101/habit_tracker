@@ -205,6 +205,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  const GoogleSignInWidget(),
+                  SizedBox(
                     height: size.height * 0.024,
                   ),
                   Container(
