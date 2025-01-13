@@ -7,7 +7,7 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  bloc: ^8.1.4
+  bloc: ^9.0.0
   build_version: ^2.1.1
   cupertino_icons: ^1.0.8
   firebase_analytics: ^11.4.0
@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.2
-  flutter_bloc: ^8.1.6
+  flutter_bloc: ^9.0.0
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: ^9.2.4
@@ -37,7 +37,7 @@ dependencies:
   toastification: ^2.3.0
 
 dev_dependencies:
-  bloc_test: ^9.1.7
+  bloc_test: ^10.0.0
   build_runner: ^2.4.14
   flutter_test:
     sdk: flutter
